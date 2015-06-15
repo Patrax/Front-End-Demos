@@ -1,0 +1,46 @@
+<%= render 'shared/page_title', title: "Games for : " + @tag.name + " tag" %>
+
+<ul class="nav nav-tabs">
+  <li class='active'><%= link_to "Games", games_path %></li>
+  <li><%= link_to "Users", users_path %></li>
+</ul>
+
+<%= will_paginate @games %>
+
+<% @tag.games.each do |game| %>
+  <div class="row">
+    
+    <div class="col-md-2">
+      <section class="user_info center">
+        <%= link_to gravatar_for( game.user, size: 100 ), user_path(game.user) %>
+        <h5><b>Author: <%= game.user.username %></b></h5>
+      </section>
+    </div>
+    
+    <div class="col-lg-6 well">
+      <h4><%= link_to game.name, game_path(game) %></h4>
+      <p><%= game.summary %></p>
+      <p>Tags: <%= render game.tags %></p>
+      <p>
+        <span class='quiet'><small>created: <%= time_ago_in_words(game.created_at) %>, </small></span>
+        <span class='quiet'><small>updated: <%= time_ago_in_words(game.updated_at) %></small></span>
+      </p>
+      <div class="pull-right">
+        <%= link_to like_game_path(game, like: true), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= game.thumbs_up_total %>
+        <% end %> &nbsp&nbsp&nbsp&nbsp
+        <%= link_to like_game_path(game, like: false), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= game.thumbs_down_total %>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <%= image_tag(game.picture.url, size:"250x150", class: "gravatar") if game.picture? %>
+    </div>
+    
+  </div>
+  <hr/>
+<% end %>
+
+<%= will_paginate @games %>
