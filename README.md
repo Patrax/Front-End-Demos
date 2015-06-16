@@ -15,3 +15,6 @@ The following libraries will be tested and explained:
 * Velocity
 * Three
 * Jade
+
+### Resources
+[d3 Wiki Gallery](https://github.com/mbostock/d3/wiki/Gallery)
