@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get '/home', to: 'pages#home'
+  get '/d3', to: 'pages#d3'
   get '/challenges/try', to: 'pages#try_challenge'
 
   resources :users, except: [:new, :destroy]
